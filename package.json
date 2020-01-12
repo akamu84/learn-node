@@ -54,6 +54,9 @@
     "babel-preset-env": "^1.6.0",
     "concurrently": "3.4.0",
     "css-loader": "0.28.11",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.0",
     "extract-text-webpack-plugin": "2.1.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.18.3",
@@ -61,5 +64,18 @@
     "postcss-loader": "1.3.3",
     "sass-loader": "6.0.3",
     "webpack": "2.2.1"
-  }
+  },
+  "description": "To load sample data, run the following command in your terminal:",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akamu84/learn-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akamu84/learn-node/issues"
+  },
+  "homepage": "https://github.com/akamu84/learn-node#readme"
 }

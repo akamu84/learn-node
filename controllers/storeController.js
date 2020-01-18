@@ -30,6 +30,20 @@ exports.editStore = async (req, res) => {
   // TODO
   // Render edit form
   res.render('editStore', { title: `Edit ${store.name}`, store });
+};
 
-  res.json(store);
+exports.updateStore = async (req, res) => {
+  // Find and update store
+  const store = await Store.findOneAndUpdate(
+    { _id: req.params.id }, // query
+    req.body, // data
+    { // options
+      new: true, // return the new store
+      runValidators: true, // run model validation
+    },
+  ).exec(); // run the query
+
+  req.flash('success', `Successfully updated <strong>${store.name}</strong>. <a href="/store/${store.slug}">View Store →</a>`);
+  // Redirect to the store
+  res.redirect(`/stores/${store.id}/edit`);
 };

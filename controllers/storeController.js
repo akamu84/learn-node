@@ -58,6 +58,17 @@ exports.getStores = async (req, res) => {
   res.render('stores', { title: 'Stores', stores });
 };
 
+exports.getStoreBySlug = async (req, res, next) => {
+  // Find the store given the slug
+  const store = await Store.findOne({ slug: req.params.slug });
+  // If no store found then go to next middleware
+  if (!store) {
+    return next();
+  }
+  // Render store
+  return res.render('store', { title: store.name, store });
+};
+
 exports.editStore = async (req, res) => {
   // Find the store given the ID
   const store = await Store.findOne({ _id: req.params.id });

@@ -2,10 +2,9 @@
 
 var mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
-
 var slug = require('slugs');
 
+mongoose.Promise = global.Promise;
 var storeSchema = new mongoose.Schema({
   name: {
     type: String,

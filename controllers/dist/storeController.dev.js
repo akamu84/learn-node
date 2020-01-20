@@ -226,3 +226,29 @@ exports.updateStore = function _callee6(req, res) {
     }
   });
 };
+
+exports.getStoresByTag = function _callee7(req, res) {
+  var tags, tag;
+  return regeneratorRuntime.async(function _callee7$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.next = 2;
+          return regeneratorRuntime.awrap(Store.getTagsList());
+
+        case 2:
+          tags = _context7.sent;
+          tag = req.params.tag;
+          res.render('tag', {
+            tags: tags,
+            tag: tag,
+            title: 'Tags'
+          });
+
+        case 5:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  });
+};

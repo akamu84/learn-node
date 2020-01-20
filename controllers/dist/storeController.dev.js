@@ -1,5 +1,13 @@
 "use strict";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var mongoose = require('mongoose');
 
 var multer = require('multer');
@@ -228,24 +236,36 @@ exports.updateStore = function _callee6(req, res) {
 };
 
 exports.getStoresByTag = function _callee7(req, res) {
-  var tags, tag;
+  var tag, tagQuery, tagsPromise, storesPromise, _ref, _ref2, tags, stores;
+
   return regeneratorRuntime.async(function _callee7$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          _context7.next = 2;
-          return regeneratorRuntime.awrap(Store.getTagsList());
-
-        case 2:
-          tags = _context7.sent;
           tag = req.params.tag;
+          tagQuery = tag || {
+            $exists: true
+          };
+          tagsPromise = Store.getTagsList();
+          storesPromise = Store.find({
+            tags: tagQuery
+          });
+          _context7.next = 6;
+          return regeneratorRuntime.awrap(Promise.all([tagsPromise, storesPromise]));
+
+        case 6:
+          _ref = _context7.sent;
+          _ref2 = _slicedToArray(_ref, 2);
+          tags = _ref2[0];
+          stores = _ref2[1];
           res.render('tag', {
             tags: tags,
             tag: tag,
+            stores: stores,
             title: 'Tags'
           });
 
-        case 5:
+        case 11:
         case "end":
           return _context7.stop();
       }

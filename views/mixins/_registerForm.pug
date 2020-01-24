@@ -8,5 +8,5 @@ mixin registerForm(user = {})
         label(for="password") Password
         input(type="password" name="password" value=(user && user.password)) 
         label(for="confirm-password") Confirm Password
-        input(type="password" name="confirm-password" value=(user && user.confirm-password)) 
+        input(type="password" name="confirm-password" value=(user && user['confirm-password'])) 
         input.button(type="submit" value="Register →")
